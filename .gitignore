@@ -475,4 +475,4 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-BLOG/src/appsettings.json
+src/appsettings.json
