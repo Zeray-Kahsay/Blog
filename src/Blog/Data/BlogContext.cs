@@ -38,6 +38,11 @@ public class BlogContext : IdentityDbContext
           .HasOne(c => c.Post)
           .WithMany(p => p.Comments)
           .OnDelete(DeleteBehavior.Cascade); //a comment belongs to a post, a post may have MANY comments
+    
+     builder.Entity<Likes>()
+          .HasOne(c => c.Post)
+          .WithMany(p => p.Likes)
+          .OnDelete(DeleteBehavior.Cascade); // a like belongs to a post 
 
     builder.Entity<Likes>()
         .HasKey(k => new { k.AppUserId, k.PostId } ); // doesn't have its own PK - Joint-table
