@@ -1,6 +1,6 @@
 ﻿
 using AutoMapper;
-using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Blog;
@@ -58,17 +58,17 @@ public class PostRepository : IPostRepository
         }
     }
 
-    public async Task<Post> UpdatePost(UpdateContentDto updateContentDto)
+    public async Task<Post> UpdatePost( [FromBody] UpdateContentDto updateContentDto)
     {
         try
         {
-            var post = await _context.Posts.FindAsync(updateContentDto.Id);
+            var post = await _context.Posts.FirstOrDefaultAsync(p => p.PostId == updateContentDto.Id);
             if (post == null) return null;
-
             _mapper.Map(updateContentDto, post);
-            var result = await _context.SaveChangesAsync() > 0;
-            if (result) return post;
-            return null;
+           // var updatedPost =  _mapper.Map<UpdateContentDto>(post);
+             await _context.SaveChangesAsync();
+            return post;
+            
         }
         catch (Exception)
         {
@@ -81,8 +81,9 @@ public class PostRepository : IPostRepository
         try 
         {
             var post = await _context.Posts.FindAsync(id);
-            if (post == null) return false;
+            //if (post == null) return false;
             _context.Posts.Remove(post);
+            await _context.SaveChangesAsync();
             return true;
         }
         catch (Exception)

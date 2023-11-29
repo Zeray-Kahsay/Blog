@@ -42,16 +42,16 @@ namespace Blog.Controllers
         [HttpPut("updatePost")]
         public async Task<ActionResult<Post>> UpdatePost(UpdateContentDto updateContentDto)
         {
-            var post =  await _postRepository.UpdatePost(updateContentDto);
-            if (post == null) return NotFound("Post not found");
-            return post; 
+            var updatedContent =  await _postRepository.UpdatePost(updateContentDto);
+            if (updatedContent == null) return NotFound("Post not found");
+            return updatedContent; 
         }
 
         [HttpDelete("{id}", Name = "delete")]
         public async Task<ActionResult<bool>> DeletePost(int id)
         {
             var post = await _postRepository.DeletePost(id);
-            if (!post) return BadRequest("Unable deleting the post");
+            if (!post) return NotFound("No post to delete with this Id");
             return Ok("successfully deleted!");
         }
 
