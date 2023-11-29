@@ -1,5 +1,6 @@
 ﻿
 using AutoMapper;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace Blog;
@@ -57,12 +58,36 @@ public class PostRepository : IPostRepository
         }
     }
 
-    public Task<ContentDto> UpdatePost(UpdateContentDto updateContentDto)
+    public async Task<Post> UpdatePost(UpdateContentDto updateContentDto)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var post = await _context.Posts.FindAsync(updateContentDto.Id);
+            if (post == null) return null;
+
+            _mapper.Map(updateContentDto, post);
+            var result = await _context.SaveChangesAsync() > 0;
+            if (result) return post;
+            return null;
+        }
+        catch (Exception)
+        {
+            return null;
+        }
+
     }
-    public Task<bool> DeletePost(int id)
+    public async Task<bool> DeletePost(int id)
     {
-        throw new NotImplementedException();
+        try 
+        {
+            var post = await _context.Posts.FindAsync(id);
+            if (post == null) return false;
+            _context.Posts.Remove(post);
+            return true;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
     }
 }
