@@ -65,10 +65,8 @@ public class PostRepository : IPostRepository
             var post = await _context.Posts.FirstOrDefaultAsync(p => p.PostId == updateContentDto.Id);
             if (post == null) return null;
             _mapper.Map(updateContentDto, post);
-           // var updatedPost =  _mapper.Map<UpdateContentDto>(post);
-             await _context.SaveChangesAsync();
-            return post;
-            
+            await _context.SaveChangesAsync();
+            return post;        
         }
         catch (Exception)
         {
@@ -81,7 +79,6 @@ public class PostRepository : IPostRepository
         try 
         {
             var post = await _context.Posts.FindAsync(id);
-            //if (post == null) return false;
             _context.Posts.Remove(post);
             await _context.SaveChangesAsync();
             return true;
