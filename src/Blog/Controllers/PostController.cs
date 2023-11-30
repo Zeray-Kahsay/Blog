@@ -11,7 +11,7 @@ namespace Blog.Controllers
             _postRepository = postRepository;
         }
 
-        [HttpGet("GetPosts")]
+        [HttpGet]
         public async Task<ActionResult<List<Post>>> GetPosts()
         {
            var posts = await  _postRepository.GetAllPosts();

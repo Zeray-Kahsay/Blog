@@ -39,6 +39,34 @@ public class PostRepository : IPostRepository
             var posts = await _context.Posts.ToListAsync();
              if (posts == null) return null;
             return posts;
+
+            //TODO: Get all comments to a post and their corresponding athour
+            /*  
+            posts = [
+                {
+                name:
+                title:
+                content:
+                comments: [
+                    {
+                        body:
+                        author:
+                        authorPhot:
+                        createdAt:
+                    }
+                ]
+                likes: [
+                    {
+                        appUser:
+                        post:
+
+                    }
+                ]
+                
+                }
+            ]
+            
+            */
         }
         catch (Exception)
         {
@@ -51,6 +79,7 @@ public class PostRepository : IPostRepository
         try 
         {
             return  await _context.Posts.FindAsync(id);
+            
         }
         catch (Exception)
         {

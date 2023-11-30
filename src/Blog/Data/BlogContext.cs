@@ -34,18 +34,26 @@ public class BlogContext : IdentityDbContext
               new AppRole { Id = 1, Name = "Memeber", NormalizedName = "MEMBER"},
               new AppRole { Id = 2, Name = "Admin", NormalizedName = "ADMIN"}
            );
-    builder.Entity<Comment>()
-          .HasOne(c => c.Post)
-          .WithMany(p => p.Comments)
+    builder.Entity<Post>()
+          .HasMany(c => c.Comments)
+          .WithOne(p => p.Post)
           .OnDelete(DeleteBehavior.Cascade); //a comment belongs to a post, a post may have MANY comments
+                                            // post deleted, its comments deleted
     
-     builder.Entity<Likes>()
-          .HasOne(c => c.Post)
-          .WithMany(p => p.Likes)
-          .OnDelete(DeleteBehavior.Cascade); // a like belongs to a post 
+     builder.Entity<Post>()
+          .HasMany(p => p.Likes)
+          .WithOne(li => li.Post)
+          .OnDelete(DeleteBehavior.Cascade); // a like belongs to a post, a post may have MANY Likes
+                                            // post deleted, its likes deleted
 
     builder.Entity<Likes>()
         .HasKey(k => new { k.AppUserId, k.PostId } ); // doesn't have its own PK - Joint-table
+    
+      builder.Entity<AppUser>()
+          .HasMany(a => a.UserLikes)
+          .WithOne(ul => ul.AppUser)
+          .OnDelete(DeleteBehavior.Restrict); // user may like posts, a like belongs to a user
+                                              // user deleted, their likes remain
 
 // MANY-to-MANY
     builder.Entity<AppUser>()
@@ -59,8 +67,6 @@ public class BlogContext : IdentityDbContext
         .WithOne(u => u.Role)
         .HasForeignKey(ur => ur.RoleId)
         .IsRequired();
-    
-
   
   }
 
