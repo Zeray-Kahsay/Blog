@@ -1,3 +1,9 @@
+* {
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -5,6 +11,8 @@
   padding: 20px;
   background-color: #333;
   color: #fff;
+  position: sticky;
+  top: 0; 
 }
 
 .navbar-logo {
@@ -15,7 +23,7 @@
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 70px;
+  top: 20px;
   left: 0;
   width: 100%;
   background-color: #333;
@@ -25,7 +33,7 @@
 }
 
 .navbar-links.active {
-  max-height: 300px; /* Adjust the max height as needed */
+  max-height: 200px; /* Adjust the max height as needed */
 }
 
 .navbar-links a {
@@ -61,7 +69,7 @@
   transform: rotate(45deg) translate(-5px, -6px);
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 500px) {
   .navbar-links {
     position: relative;
     max-height: none;
@@ -72,3 +80,5 @@
     display: flex;
   }
 }
+
+

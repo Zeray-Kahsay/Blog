@@ -2,9 +2,9 @@
 
 import PostList from "../Post/PostList";
 
-const Catalog = ({ posts }) => {
+const Catalog = ({ posts, onClick }) => {
   console.log("Catalog loading");
-  return <PostList posts={posts} />;
+  return <PostList posts={posts}  onClick={onClick}/>;
 };
 
 export default Catalog;

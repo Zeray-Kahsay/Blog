@@ -15,14 +15,16 @@ function App() {
       .then((data) => setPosts(data));
   }, []);
 
+  const handleClick = () => {
+    console.log("Card clicked!")
+  }
+
   return (
     <>
       <Navbar />
 
       <div>
-        <h1> Welcome to our Blog </h1>
-        <Catalog posts={posts} />
-        <h2> I miss something here </h2>
+        <Catalog posts={posts} onClick ={handleClick} />
       </div>
     </>
   );

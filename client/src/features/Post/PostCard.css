@@ -1,11 +1,13 @@
 .card {
   width: 100%;
   max-width: 300px;
-  margin: 20px;
+  margin: 15px;
   border: 1px solid #ddd;
-  border-radius: 8px;
+  border-radius: 5px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  
 }
 
 .card-image {
