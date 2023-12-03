@@ -5,5 +5,5 @@ namespace Blog;
 [Route("api/[controller]")]
 public class BaseController : ControllerBase 
 {
-
+    
 }

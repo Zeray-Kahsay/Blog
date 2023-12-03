@@ -1,27 +1,58 @@
-import "./Navbar.css";
+
+import { useState } from 'react'
+import { NavLink } from 'react-router-dom'
+//import { ReactComponent as Hamburger } from '../../assets/icons/hamburger.svg'
+//import { ReactComponent as Brand } from '../../assets/icons/logo.svg'
+import './Navbar.css'
 
 const Navbar = () => {
-  //const [isMenuOpen, setMenuOpen] = useState(false);
+  const [showNavbar, setShowNavbar] = useState(false)
 
-  // const toggleMenu = () => {
-  //   setMenuOpen(!isMenuOpen);
-  // };
+  const handleShowNavbar = () => {
+    setShowNavbar(!showNavbar)
+  }
 
   return (
-    <div className="navbar">
-      <div className="navbar-links">
-        <a href="#">Logo</a>
-        <a href="#">Home</a>
-        <a href="#">About</a>
-        <a href="#">Services</a>
-        <a href="#">Contact</a>
+    <nav className="navbar">
+      <div className="container">
+        <div className="logo">
+          {/* <Brand /> */}
+        </div>
+        <div className="menu-icon" onClick={handleShowNavbar}>
+          {/* <Hamburger /> */}
+        </div>
+        <div className={`nav-elements  ${showNavbar && 'active'}`}>
+          <ul>
+            <li>
+              <NavLink to="/home">Home</NavLink>
+            </li>
+            <li>
+              <NavLink to="/catalog">Catalog</NavLink>
+            </li>
+            <li>
+              <NavLink to="/about">About</NavLink>
+            </li>
+            <li>
+              <NavLink to="/projects">Projects</NavLink>
+            </li>
+            <li>
+              <NavLink to="/login">Login</NavLink>
+            </li>
+            <li>
+              <NavLink to="/register">Register</NavLink>
+            </li>
+            <li>
+              <NavLink to="/contact">Contact us</NavLink>
+            </li>
+          </ul>
+        </div>
       </div>
-     
-    </div>
-  );
-};
+    </nav>
+  )
+}
 
 export default Navbar;
+
 
   //TODO: mobile 
   // return (

@@ -1,14 +1,19 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-no-undef */
 
+import { useNavigate } from "react-router-dom";
 import "./PostCard.css";
 
-function PostCard({ post, onClick }) {
+function PostCard({ post }) {
+  const navigate = useNavigate();
 
+  const handleClick = () => {
+    navigate(`/catalog/${post.postId}`)
+  }
 
   return (
    
-    <div className="card" key={post.postId} onClick={onClick}>
+    <div className="card" key={post.postId} onClick={handleClick} >
       <img
         className="card-image"
         src="https://placekitten.com/500/300"

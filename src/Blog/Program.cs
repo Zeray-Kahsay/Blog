@@ -82,6 +82,9 @@ builder.Services.AddSwaggerGen(c =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+// app.UseDeveloperExceptionHandler(); --> removed since .Net 6, but does exist behind the scene
+// Exception middleware handler should sit at the top so it handles a request a way in and respose a way out
+app.UseMiddleware<ExceptionMiddleware>();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -90,7 +93,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors(opt =>
 {
-    opt.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://127.0.0.1:3000");
+    opt.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:3000");
 });
 
 //app.UseHttpsRedirection();
