@@ -1,6 +1,3 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/jsx-no-undef */
-
 import { useNavigate } from "react-router-dom";
 import "./PostCard.css";
 

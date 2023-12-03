@@ -2,9 +2,10 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import agent from "../../app/api/agent";
+import NotFound from "../../app/Errors/notFound";
 
 const PostDetails = () => {
-  const params = useParams(); // read id param from Url
+  const params = useParams(); // reads id param from Url. NB: data from url is always string 
   const { id } = params; 
   // or const {id} = useParams(); destructuring on the fly
   const [postContent, setPostContent] = useState({});
@@ -25,14 +26,18 @@ const PostDetails = () => {
   // }, [id])
 
   useEffect(() => {
-    agent.Catalog.details(id)
+    agent.Catalog.details(parseInt(id))
       .then(response => setPostContent(response))
+      .catch(error => console.log(error))
       .finally(() => setLoading(false));
   }, [id])
 
 
   if (laoding) return <h3>Loading...</h3>
-  if (!postContent) return <h3>Post content not found </h3>
+
+  if (!postContent) return <NotFound /> 
+
+  //TODO: Styling response 
 
   return (
     <>

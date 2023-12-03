@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-no-undef */
-/* eslint-disable react/prop-types */
 import PostCard from "./PostCard";
 import "./PostList.css"
 
