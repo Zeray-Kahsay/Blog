@@ -1,5 +1,7 @@
 import './Registration.css'; 
 import { useState } from 'react';
+import agent from '../../api/agent';
+
 
 const Registration = () => {
   const [formData, setFormData] = useState({
@@ -16,7 +18,7 @@ const Registration = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //TDO: registeration logic
+    agent.Account.register(formData);
     console.log('Form submitted:', formData);
   };
 

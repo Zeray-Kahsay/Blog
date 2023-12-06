@@ -53,7 +53,7 @@ public class AccountRepository : IAccountRepository
         var newUser = new AppUser
         {
             Email = registerDto.Email,
-            UserName = registerDto.Email
+            UserName = registerDto.UserName
         };
 
         var result = await _userManager.CreateAsync(newUser, registerDto.Password);
