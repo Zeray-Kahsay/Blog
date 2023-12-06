@@ -3,13 +3,17 @@ import { toast } from "react-toastify";
 import { router } from "../router/routes";
 
 
+const sleep = () => new Promise(resolve => setTimeout(resolve, 1000));
+
+
 axios.defaults.baseURL = 'http://localhost:5000/api/';
 
 const responseBody = (response) => response.data; // response is a type of AxiosResponse(response.data)
 
 
 // the use() fn returns a response both the success and/or failure
-axios.interceptors.response.use(response => {
+axios.interceptors.response.use(async response => {
+  await sleep();
     return response // Promise succeeded, retunr response 
 }, (error) => {
   const { data, status } = error.response;
@@ -51,6 +55,16 @@ const Catalog = {
   details: (id) => requests.get(`post/${id}`),
 }
 
+const Account = {
+  login: (values) => requests.post('account/login', values),
+  register: (values) => requests.post('account/register', values),
+  currentUser: () => requests.get('account/currentUser'),
+}
+
+const Post = {
+  create: (values) => requests.post('post/createPost', values)
+}
+
 const TestErrors = {
   get400Error: () => requests.get('buggy/bad-request'),
   get401Error: () => requests.get('buggy/unauthorized'),
@@ -61,7 +75,9 @@ const TestErrors = {
 
 const agent = {
   Catalog,
-  TestErrors
+  TestErrors,
+  Account,
+  Post
 }
 
 export default agent; 

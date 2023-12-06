@@ -27,6 +27,8 @@ const Catalog = () => {
       .finally(() => setIsLoading(false))  ;
   }, [])
 
+  //TODO: make a custom shimmer for loading 
+
   if (isLoading) return <h3>Loading...</h3>
   if (!posts) return <h3>Problem fetching posts </h3>
 

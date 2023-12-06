@@ -37,7 +37,7 @@ public class AccountController : BaseController
       return Ok(result);
     }
     _log.LogInformation("Login failed");
-    return BadRequest(result);
+    return Unauthorized(result);
   }
 
   [HttpPost("logout")]

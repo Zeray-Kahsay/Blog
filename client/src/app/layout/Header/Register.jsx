@@ -1,4 +1,4 @@
-import './Registration.css'; // Import your CSS file for styling
+import './Registration.css'; 
 import { useState } from 'react';
 
 const Registration = () => {
@@ -16,7 +16,7 @@ const Registration = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add your registration logic here
+    //TDO: registeration logic
     console.log('Form submitted:', formData);
   };
 

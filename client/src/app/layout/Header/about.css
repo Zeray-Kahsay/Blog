@@ -1,0 +1,38 @@
+.form-control {
+  margin: 30px;
+  font-family: sans-serif;
+  font-size:x-large ;
+  font-weight: 300;
+
+
+}
+
+.control-group {
+  margin-top: 10px;
+  width: 50%;
+  font-family: sans-serif;
+  font-size:x-large ;
+  font-weight: 300;
+}
+
+.text-area {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-family: sans-serif;
+  font-size:x-large ;
+  font-weight: 300;  
+}
+
+.btn {
+  width: 50%;;
+  margin:0 auto;
+  padding: 13px;
+}
+
+ button {
+padding: 10px;
+font-family: sans-serif;
+font-size: large;
+font-weight: 100;
+}
+

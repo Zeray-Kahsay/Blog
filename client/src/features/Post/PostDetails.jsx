@@ -35,7 +35,8 @@ const PostDetails = () => {
 
   if (laoding) return <h3>Loading...</h3>
 
-  if (!postContent) return <NotFound /> 
+  if (postContent == null) return <NotFound /> 
+  
 
   //TODO: Styling response 
 

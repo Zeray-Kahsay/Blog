@@ -8,7 +8,7 @@ import Catalog from "../../features/catalog/catalog";
 import Contact from "../layout/Header/Contact";
 import Projects from "../../features/Projects/Projects";
 import Home from "../layout/Header/Home";
-import Error from "../../features/Error/Error";
+//import Error from "../../features/Error/Error";
 import ServerError from "../Errors/serverError";
 import NotFound from "../Errors/notFound";
 
@@ -17,7 +17,7 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
-    errorElement: <Error />,
+    //errorElement: <Error />,
     children: [
       {path: 'catalog', element: <Catalog /> },
       { path: 'catalog/:id', element: <PostDetails /> },
