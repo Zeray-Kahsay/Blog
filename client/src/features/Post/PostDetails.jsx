@@ -8,7 +8,7 @@ const PostDetails = () => {
   const params = useParams(); // reads id param from Url. NB: data from url is always string 
   const { id } = params; 
   // or const {id} = useParams(); destructuring on the fly
-  const [postContent, setPostContent] = useState({});
+  const [postContent, setPostContent] = useState(null);
   const [laoding, setLoading] = useState(true);
 
 
@@ -35,12 +35,11 @@ const PostDetails = () => {
 
   if (laoding) return <h3>Loading...</h3>
 
-  if (postContent == null) return <NotFound /> 
+  //if (postContent == null) return <NotFound /> 
   
-
-  //TODO: Styling response 
-
-  return (
+  return !postContent ? (
+    <NotFound /> 
+  ) : (
     <>
       <h1> {postContent.name} </h1>
       <div> {postContent.content} </div>   

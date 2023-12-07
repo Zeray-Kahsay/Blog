@@ -31,13 +31,16 @@ public class PostRepository : IPostRepository
 
     }
 
-    public async Task<List<Post>> GetAllPosts()
+    public async Task<List<Post>> GetAllPosts( [FromQuery] string searchTerm)
     {
         try
         {
-            var posts = await _context.Posts.ToListAsync();
-             if (posts == null) return null;
-            return posts;
+            var query = _context.Posts
+                      .Search(searchTerm)
+                      .AsQueryable();
+
+             if (query == null) return null;
+            return  await query.ToListAsync();
 
             //TODO: Get all comments to a post and their corresponding athour
             /*  
@@ -116,4 +119,6 @@ public class PostRepository : IPostRepository
             return false;
         }
     }
+
+    
 }

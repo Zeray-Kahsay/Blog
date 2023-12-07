@@ -1,8 +1,9 @@
 //import axios from "axios";
 import { useState, useEffect } from "react";
 import agent from "../../app/api/agent";
-
 import PostList from "../Post/PostList";
+import SearchPost from "../Post/SearchPost";
+import useOnline from "../../hooks/useOnline";
 
 const Catalog = () => {
   const [posts, setPosts] = useState([]);
@@ -27,13 +28,28 @@ const Catalog = () => {
       .finally(() => setIsLoading(false))  ;
   }, [])
 
+  
+  // To know if a user is online or not 
+  const isOnline = useOnline();
+  if (!isOnline) {
+    return <h1>⭕⭕ offline, please check your internet connection  </h1>
+  }
+
+
+  // const handleChange = () => {
+
+  // }
+
   //TODO: make a custom shimmer for loading 
 
   if (isLoading) return <h3>Loading...</h3>
   if (!posts) return <h3>Problem fetching posts </h3>
 
   return (
-    < PostList posts = { posts }  />
+    <>
+      <SearchPost />
+      < PostList posts = { posts }  />  
+    </>
  );
 
 };

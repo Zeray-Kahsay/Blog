@@ -12,9 +12,9 @@ namespace Blog.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Post>>> GetPosts()
+        public async Task<ActionResult<List<Post>>> GetPosts(string searchTerm)
         {
-           var posts = await  _postRepository.GetAllPosts();
+           var posts = await  _postRepository.GetAllPosts(searchTerm);
             if (posts == null) return NotFound("Unable fetching posts");
 
             return posts; 

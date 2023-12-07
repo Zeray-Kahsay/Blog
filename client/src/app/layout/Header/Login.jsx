@@ -21,7 +21,7 @@ const Login = () => {
     
     agent.Account.login(formData);
 
-    navigate('/admin');
+    navigate('/catalog');
 
     console.log('Form submitted:', formData);
   };
