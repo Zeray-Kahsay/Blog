@@ -40,10 +40,10 @@ const PostDetails = () => {
   return !postContent ? (
     <NotFound /> 
   ) : (
-    <>
+    <div style={{ whiteSpace: 'pre-wrap', margin: '30px', fontFamily:'sans-serif', fontSize:'15px' }} >
       <h1> {postContent.name} </h1>
-      <div> {postContent.content} </div>   
-    </>
+      <pre style={{ whiteSpace: 'pre-wrap',  }}> {postContent.content} </pre>   
+    </div>
   )
 }
 

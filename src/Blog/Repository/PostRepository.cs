@@ -31,16 +31,19 @@ public class PostRepository : IPostRepository
 
     }
 
-    public async Task<List<Post>> GetAllPosts( [FromQuery] string searchTerm)
+    public async Task<PagedList<Post>> GetAllPosts(PostParams postParams)
     {
         try
         {
             var query = _context.Posts
-                      .Search(searchTerm)
+                      .Search(postParams.SearchTerm)
+                      .Filter(postParams.Techs)
                       .AsQueryable();
 
-             if (query == null) return null;
-            return  await query.ToListAsync();
+            if (query == null) return null;
+            var posts = await PagedList<Post>.ToPagedList(query, postParams.PageNumber, postParams.PageSize);
+
+            return posts;
 
             //TODO: Get all comments to a post and their corresponding athour
             /*  
@@ -120,5 +123,20 @@ public class PostRepository : IPostRepository
         }
     }
 
-    
+    public async Task<List<string>> GetFilters()
+    {
+        try
+        {
+        var techStack = await _context.Posts
+                        .Select(post => post.Name)
+                        .Distinct()
+                        .ToListAsync();
+
+            return techStack;
+        }
+        catch(Exception)
+        {
+            return null;
+        }
+    }
 }

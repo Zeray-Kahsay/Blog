@@ -1,22 +1,26 @@
+using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
+using SQLitePCL;
 
 namespace Blog.Controllers
 {
-    public class PostController : BaseController 
+    public class PostsController : BaseController 
     {
         private readonly IPostRepository _postRepository;
 
-        public PostController(IPostRepository postRepository)
+        public PostsController(IPostRepository postRepository)
         {
             _postRepository = postRepository;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Post>>> GetPosts(string searchTerm)
+        public async Task<ActionResult<PagedList<Post>>> GetPosts( [FromQuery] PostParams postParams)
         {
-           var posts = await  _postRepository.GetAllPosts(searchTerm);
+           var posts = await  _postRepository.GetAllPosts(postParams);
             if (posts == null) return NotFound("Unable fetching posts");
 
+            // send pagination info to the client embedded in the Response headers
+            Response.AddPaginationHeader(posts.MetaData);
             return posts; 
         }
 
@@ -53,6 +57,15 @@ namespace Blog.Controllers
             var post = await _postRepository.DeletePost(id);
             if (!post) return NotFound("No post to delete with this Id");
             return Ok("successfully deleted!");
+        }
+
+        [HttpGet("filters")]
+        public async Task<ActionResult<List<string>>> GetFilters()
+        {
+            var techStack = await _postRepository.GetFilters();
+            if (techStack == null) return NotFound("No tech stack name found");
+
+            return techStack;
         }
 
 
